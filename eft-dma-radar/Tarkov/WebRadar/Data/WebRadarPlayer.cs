@@ -101,19 +101,11 @@ namespace eft_dma_radar.Tarkov.WebRadar.Data
                     // ✅ Try to get KD safely
                     float kd = 0f;
                     float totalHoursPlayed = 0f;
-
-                    try
-                    {
-                        if (!isAI)  // ✅ Only access KD for real players
+                        if (!isAI && player is ObservedPlayer observed)
                         {
-                            kd = player.KD;
-                            totalHoursPlayed = player.TotalHoursPlayed;
+                            kd = observed.Profile?.Overall_KD ?? 0f;
+                            totalHoursPlayed = observed.Profile?.Hours ?? 0f;
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        //LoneLogging.WriteLine($"[ERROR] Failed to get KD/Hours for player {player.Name ?? "Unknown"}: {ex.Message}");
-                    }
 
                     //LoneLogging.WriteLine($"Player: {player.Name ?? "Unknown"} - KD: {kd} - Hours: {totalHoursPlayed}");
 

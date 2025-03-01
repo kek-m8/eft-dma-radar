@@ -254,13 +254,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// Player name.
         /// </summary>
         public virtual string Name { get; set; }
-        public PlayerProfile Profile { get; private set; }
-    
-        public Player(ObservedPlayer observedPlayer)
-        {
-            Profile = new PlayerProfile(observedPlayer);
-        }
-    
+        public PlayerProfile Profile { get; private set; }    
         public float KD => Profile.Overall_KD ?? 0f;
         public int TotalHoursPlayed => Profile.Hours ?? 0;
         /// <summary>
