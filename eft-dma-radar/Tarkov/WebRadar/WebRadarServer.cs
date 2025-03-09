@@ -91,6 +91,7 @@ namespace eft_dma_radar.Tarkov.WebRadar
                 IsBackground = true
             }.Start();
         }
+
         /// <summary>
         /// Checks if the specified IP Address / Port Number are valid, and throws an exception if they are invalid.
         /// Performs a TCP Bind Test.
