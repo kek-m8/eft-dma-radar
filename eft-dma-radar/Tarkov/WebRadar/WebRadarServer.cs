@@ -45,8 +45,6 @@ namespace eft_dma_radar.Tarkov.WebRadar
             _webHost = Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls($"http://0.0.0.0:{port}");
-
                     webBuilder.UseKestrel()
                         .ConfigureServices(services =>
                         {
@@ -65,15 +63,12 @@ namespace eft_dma_radar.Tarkov.WebRadar
                             {
                                 options.AddDefaultPolicy(builder =>
                                 {
-                                    builder.WithOrigins("http://fd-mambo.org:8080")
+                                    builder.AllowAnyOrigin()
                                            .AllowAnyHeader()
                                            .AllowAnyMethod()
-                                           .SetIsOriginAllowed(_ => true)
-                                           .SetIsOriginAllowedToAllowWildcardSubdomains()
-                                           .AllowCredentials();                                           
+                                           .SetIsOriginAllowedToAllowWildcardSubdomains();
                                 });
                             });
-                         
                         })
                         .Configure(app =>
                         {
@@ -96,7 +91,6 @@ namespace eft_dma_radar.Tarkov.WebRadar
                 IsBackground = true
             }.Start();
         }
-
         /// <summary>
         /// Checks if the specified IP Address / Port Number are valid, and throws an exception if they are invalid.
         /// Performs a TCP Bind Test.
